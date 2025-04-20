@@ -1267,7 +1267,7 @@
     <!-- Template Main JS File -->
     <script src="assets/js/main.js"></script>
     <script type="module">
-      import { backendUrl } from "./config.js";
+      const backendUrl = "http://170.106.188.224:8080";
 
       window.exportUsersCSV = function () {
         window.location.href = `${backendUrl}/api/export/users?format=csv`;
