@@ -161,7 +161,8 @@
         document.getElementById("register-content").classList.add("active");
         document.getElementById("login-content").classList.remove("active");
       });
-      import { backendUrl } from "./config.js";
+      // import { backendUrl } from "./config.js";
+      const backendUrl = "http://170.106.188.224:8080";
       // 登录表单提交
       document.getElementById("login-form").addEventListener("submit", (e) => {
         e.preventDefault();
