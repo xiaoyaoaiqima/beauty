@@ -109,17 +109,11 @@
       <!-- ======= Breadcrumbs ======= -->
       <section id="breadcrumbs" class="breadcrumbs">
         <style>
-          .btn-paypal {
+          .btn-stripe {
             background-color: #ffc439;
             border: none;
             color: #000;
             margin-right: 10px;
-          }
-
-          .btn-visa {
-            background-color: #1a1f71;
-            border: none;
-            color: #fff;
           }
         </style>
         <div class="container">
@@ -239,28 +233,18 @@
                 ></video>
               </div>
               <div class="payment-buttons mt-3">
-                <button class="btn btn-primary btn-paypal">
-                  Pay with PayPal
-                </button>
-                <button class="btn btn-primary btn-visa">Pay with Visa</button>
+                <button class="btn btn-primary btn-stripe">stripe支付</button>
               </div>
             </div>
           </div>
         </div>
         <script>
           document
-            .querySelector(".btn-paypal")
+            .querySelector(".btn-stripe")
             .addEventListener("click", function () {
               // Add your PayPal payment code here
               window.location.href =
                 "https://buy.stripe.com/test_dR64iD2ycarU1a04gg";
-            });
-
-          document
-            .querySelector(".btn-visa")
-            .addEventListener("click", function () {
-              // Add your Visa payment code here
-              alert("Visa payment process");
             });
         </script>
       </section>
