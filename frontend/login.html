@@ -146,7 +146,7 @@
       <div id="message" class="message"></div>
     </div>
 
-    <script>
+    <script type="module">
       // 切换标签页
       document.getElementById("login-tab").addEventListener("click", () => {
         document.getElementById("login-tab").classList.add("active");
@@ -161,9 +161,7 @@
         document.getElementById("register-content").classList.add("active");
         document.getElementById("login-content").classList.remove("active");
       });
-      const backendUrl = "http://170.106.188.224:8080"; // 替换为你的后端地址
-      //   const backendUrl = "http://localhost:8080";
-
+      import { backendUrl } from "./config.js";
       // 登录表单提交
       document.getElementById("login-form").addEventListener("submit", (e) => {
         e.preventDefault();

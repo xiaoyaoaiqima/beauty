@@ -22,18 +22,20 @@ func main() {
         AllowOrigins:     []string{"*"},                            // 允许所有来源，生产环境建议设置为具体域名
         AllowMethods:     []string{"GET", "POST", "PUT", "DELETE"}, // 允许的HTTP方法
         AllowHeaders:     []string{"Origin", "Content-Type", "Authorization"},
-        ExposeHeaders:    []string{"Content-Length"},
+        ExposeHeaders:    []string{"Content-Length", "Content-Disposition"}, // 添加Content-Disposition以支持文件下载
         AllowCredentials: true,                                     // 允许发送cookie
         MaxAge:           12 * time.Hour,                           // 预检请求的有效期
     }))
 
     // 创建处理器
     authHandler := handlers.NewAuthHandler()
+    exportHandler := handlers.NewExportHandler() // 新增导出处理器
 
     // 注册路由
     r.POST("/api/register", authHandler.Register)
     r.POST("/api/login", authHandler.Login)
     r.GET("/api/users/:id", authHandler.GetUserInfo)
+    r.GET("/api/export/users", exportHandler.ExportUsers) // 新增导出路由
 
     // 启动服务器
     log.Println("服务器启动在 http://localhost:8080")

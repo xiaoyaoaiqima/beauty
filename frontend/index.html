@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-
+    <script src="https://cdn.tailwindcss.com"></script>
     <title>enjoyBeauty官网</title>
     <meta content="" name="description" />
     <meta content="" name="keywords" />
@@ -38,7 +38,6 @@
     <!-- Template Main CSS File -->
     <link href="assets/css/style.css" rel="stylesheet" />
   </head>
-
   <body>
     <!-- ======= Header ======= -->
     <header id="header" class="fixed-top">
@@ -64,6 +63,16 @@
           </ul>
           <i class="bi bi-list mobile-nav-toggle"></i>
         </nav>
+        <div class="max-w-s mx-auto flex items-center justify-between">
+          <button
+            onclick="exportUsersCSV()"
+            id="export-csv-btn"
+            class="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded shadow transition duration-200 ease-in-out flex items-center justify-center"
+          >
+            导出用户
+          </button>
+        </div>
+
         <!-- .navbar -->
       </div>
     </header>
@@ -568,13 +577,13 @@
           }
 
           .icon-box.bg-image-1 {
-            background: url('path/to/image1.jpg') no-repeat center center;
+            background: url("path/to/image1.jpg") no-repeat center center;
             background-size: cover;
             color: #fff;
           }
 
           .icon-box.bg-image-2 {
-            background: url('path/to/image2.jpg') no-repeat center center;
+            background: url("path/to/image2.jpg") no-repeat center center;
             background-size: cover;
             color: #fff;
           }
@@ -1257,5 +1266,35 @@
 
     <!-- Template Main JS File -->
     <script src="assets/js/main.js"></script>
+    <script type="module">
+      import { backendUrl } from "./config.js";
+
+      window.exportUsersCSV = function () {
+        window.location.href = `${backendUrl}/api/export/users?format=csv`;
+      };
+
+      window.exportUsersJSON = function () {
+        window.location.href = `${backendUrl}/api/export/users?format=json`;
+      };
+      window.addEventListener("DOMContentLoaded", checkAdminStatus);
+      function checkAdminStatus() {
+        const userJson = localStorage.getItem("user");
+        if (userJson) {
+          try {
+            const user = JSON.parse(userJson);
+            if (user && user.username === "root") {
+              document.getElementById("export-csv-btn").style.display = "block";
+            } else {
+              document.getElementById("export-csv-btn").style.display = "none";
+            }
+          } catch (e) {
+            console.error("解析用户信息失败", e);
+            document.getElementById("export-csv-btn").style.display = "none";
+          }
+        } else {
+          document.getElementById("export-csv-btn").style.display = "none";
+        }
+      }
+    </script>
   </body>
 </html>
